@@ -1,0 +1,98 @@
+<section class="panel">
+  <h1>Producer</h1>
+  <p class="lede">
+    Changes stay on this form until you apply them. Apply starts a new run, clears totals, and
+    resumes generation.
+  </p>
+
+  <form [formGroup]="form" (ngSubmit)="apply()" novalidate>
+    <div class="field">
+      <label for="instrument-count">Instrument count</label>
+      <input
+        id="instrument-count"
+        type="number"
+        inputmode="numeric"
+        step="1"
+        autocomplete="off"
+        formControlName="instrumentCount"
+        [attr.min]="limits.instrumentCount.min"
+        [attr.max]="limits.instrumentCount.max"
+        [attr.aria-invalid]="
+          form.controls.instrumentCount.touched && form.hasError('instrumentCount')
+        "
+        [attr.aria-describedby]="errorId('instrumentCount', 'instrument-count-error')"
+      />
+      <p class="hint">
+        Whole number from {{ limits.instrumentCount.min }} to {{ limits.instrumentCount.max }}.
+      </p>
+      @if (form.controls.instrumentCount.touched && form.getError('instrumentCount'); as message) {
+        <p class="field-error" id="instrument-count-error">{{ message }}</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="updates-per-batch">Updates per batch</label>
+      <input
+        id="updates-per-batch"
+        type="number"
+        inputmode="numeric"
+        step="1"
+        autocomplete="off"
+        formControlName="updatesPerBatch"
+        [attr.min]="limits.updatesPerBatch.min"
+        [attr.max]="limits.updatesPerBatch.max"
+        [attr.aria-invalid]="
+          form.controls.updatesPerBatch.touched && form.hasError('updatesPerBatch')
+        "
+        [attr.aria-describedby]="errorId('updatesPerBatch', 'updates-per-batch-error')"
+      />
+      <p class="hint">
+        Whole number from {{ limits.updatesPerBatch.min }} to {{ limits.updatesPerBatch.max }}. An
+        instrument may appear more than once.
+      </p>
+      @if (form.controls.updatesPerBatch.touched && form.getError('updatesPerBatch'); as message) {
+        <p class="field-error" id="updates-per-batch-error">{{ message }}</p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="batch-interval">Batch interval</label>
+      <input
+        id="batch-interval"
+        type="number"
+        inputmode="numeric"
+        step="1"
+        autocomplete="off"
+        formControlName="batchIntervalMs"
+        [attr.min]="limits.batchIntervalMs.min"
+        [attr.max]="limits.batchIntervalMs.max"
+        [attr.aria-invalid]="
+          form.controls.batchIntervalMs.touched && form.hasError('batchIntervalMs')
+        "
+        [attr.aria-describedby]="errorId('batchIntervalMs', 'batch-interval-error')"
+      />
+      <p class="hint">
+        Milliseconds between batches, from {{ limits.batchIntervalMs.min }} to
+        {{ limits.batchIntervalMs.max }}.
+      </p>
+      @if (form.controls.batchIntervalMs.touched && form.getError('batchIntervalMs'); as message) {
+        <p class="field-error" id="batch-interval-error">{{ message }}</p>
+      }
+    </div>
+
+    <p class="rate">
+      Nominal rate <span>{{ draftRate() }}</span>
+    </p>
+
+    <button type="submit">Apply and restart</button>
+    @if (notice(); as message) {
+      <p class="notice" role="status">{{ message }}</p>
+    }
+  </form>
+</section>
+
+<aside class="panel">
+  <h2>Active run</h2>
+  <p>{{ activeSummary() }}</p>
+  <p class="hint">Editing the form does not change this run.</p>
+</aside>

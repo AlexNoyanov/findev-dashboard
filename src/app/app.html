@@ -1,0 +1,20 @@
+<header class="topbar">
+  <a class="brand" routerLink="/">Tape</a>
+  <nav>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+      >Dashboard</a
+    >
+    <a routerLink="/settings" routerLinkActive="active">Settings</a>
+  </nav>
+  <span class="spacer"></span>
+  <p class="status" [attr.data-phase]="market.phase()" aria-live="polite">{{ statusText() }}</p>
+  <button type="button" (click)="toggle()" [disabled]="pauseDisabled()">{{ pauseLabel() }}</button>
+</header>
+
+@if (market.error(); as message) {
+  <p class="banner" role="alert">{{ message }}</p>
+}
+
+<main>
+  <router-outlet />
+</main>

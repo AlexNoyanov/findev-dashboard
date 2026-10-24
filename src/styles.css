@@ -1,0 +1,47 @@
+:root {
+  color-scheme: dark;
+  --bg: #12140f;
+  --bg-raise: #1b1e16;
+  --line: #2c3126;
+  --text: #e7e4d6;
+  --muted: #8f8c7c;
+  --amber: #e2a21a;
+  --bid: #8fbf7a;
+  --ask: #d97868;
+  --font: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

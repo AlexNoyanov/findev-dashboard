@@ -1,0 +1,47 @@
+<section class="heading">
+  <h1>Market</h1>
+  <p>
+    Cumulative volume and VWAP for this run. {{ batchesLabel() }} applied.
+  </p>
+</section>
+
+<div class="table-scroll">
+  <table>
+    <caption class="sr-only">
+      Live metrics for each simulated instrument
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Instrument</th>
+        <th scope="col" title="Price of the latest trade">Last</th>
+        <th scope="col" title="Ask minus bid">Spread</th>
+        <th scope="col" title="Sum of trade quantities this run">Volume</th>
+        <th scope="col" title="Volume-weighted average trade price this run">VWAP</th>
+        <th scope="col" title="(Bid size − ask size) / (bid size + ask size)">Imbalance</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of market.rows(); track row.symbol) {
+        <tr>
+          <th scope="row">{{ row.symbol }}</th>
+          <td [class.unavailable]="row.lastPriceCents === null">
+            {{ formatPriceCents(row.lastPriceCents) }}
+          </td>
+          <td [class.unavailable]="row.spreadCents === null">
+            {{ formatPriceCents(row.spreadCents) }}
+          </td>
+          <td>{{ formatVolume(row.volume) }}</td>
+          <td [class.unavailable]="row.vwapCents === null">
+            {{ formatPriceCents(row.vwapCents) }}
+          </td>
+          <td
+            [class.unavailable]="row.imbalance === null"
+            [attr.data-direction]="direction(row.imbalance)"
+          >
+            {{ formatImbalance(row.imbalance) }}
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
