@@ -13,10 +13,6 @@ import {
 import { ProducerSettings } from './model';
 import { WorkerCommand, WorkerEvent } from './protocol';
 
-/**
- * One worker for the whole app. The dashboard and the settings page both
- * read this service, so navigation does not start a second producer.
- */
 @Injectable({ providedIn: 'root' })
 export class MarketService {
   private readonly destroyRef = inject(DestroyRef);
@@ -41,8 +37,8 @@ export class MarketService {
       this.publish();
     };
     this.worker = worker;
-    // Resolved against <base href>, so GitHub Pages and a local server
-    // both find the file. The worker bundle URL is not a stable place for it.
+    // esbuild does not rewrite import.meta.url inside the worker, so a
+    // relative wasm URL 404s. baseURI follows <base href> on Pages too.
     const wasmUrl = new URL('market-producer.wasm', document.baseURI).href;
     this.post({ type: 'boot', wasmUrl });
     this.destroyRef.onDestroy(() => this.shutdown());

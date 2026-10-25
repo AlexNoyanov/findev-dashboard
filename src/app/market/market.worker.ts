@@ -79,7 +79,7 @@ function pause(runId: number, commandSeq: number): void {
 
 function resume(runId: number, commandSeq: number): void {
   if (!session || session.runId !== runId) return;
-  // The timer starts clean. Missed intervals are not generated.
+  // Fresh timer. The pause gap is not filled in.
   session.resume(commandSeq);
   publish();
   timer = setInterval(() => {

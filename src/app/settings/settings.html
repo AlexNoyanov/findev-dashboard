@@ -1,9 +1,6 @@
 <section class="panel">
   <h1>Producer</h1>
-  <p class="lede">
-    Changes stay on this form until you apply them. Apply starts a new run, clears totals, and
-    resumes generation.
-  </p>
+  <p class="lede">The form does nothing until Apply. Apply starts a fresh run.</p>
 
   <form [formGroup]="form" (ngSubmit)="apply()" novalidate>
     <div class="field">
@@ -47,8 +44,7 @@
         [attr.aria-describedby]="errorId('updatesPerBatch', 'updates-per-batch-error')"
       />
       <p class="hint">
-        Whole number from {{ limits.updatesPerBatch.min }} to {{ limits.updatesPerBatch.max }}. An
-        instrument may appear more than once.
+        Whole number from {{ limits.updatesPerBatch.min }} to {{ limits.updatesPerBatch.max }}.
       </p>
       @if (form.controls.updatesPerBatch.touched && form.getError('updatesPerBatch'); as message) {
         <p class="field-error" id="updates-per-batch-error">{{ message }}</p>
@@ -94,5 +90,4 @@
 <aside class="panel">
   <h2>Active run</h2>
   <p>{{ activeSummary() }}</p>
-  <p class="hint">Editing the form does not change this run.</p>
 </aside>

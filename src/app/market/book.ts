@@ -6,10 +6,7 @@ export function spreadCents(bidCents: number, askCents: number): number {
   return askCents - bidCents;
 }
 
-/**
- * Integer division plus the remainder, so the ratio stays exact for values
- * that do not fit in a JS number as a single product.
- */
+/** Whole cents via bigint; the fraction comes from the remainder. */
 export function vwapCents(notionalCents: bigint, volume: bigint): number | null {
   if (volume <= 0n) return null;
   const whole = notionalCents / volume;

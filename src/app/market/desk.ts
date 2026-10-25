@@ -65,10 +65,7 @@ export function fail(state: DeskState, message: string): DeskState {
   return { ...state, phase: 'error', error: message };
 }
 
-/**
- * Drops a snapshot from a replaced run, or one that was already in flight
- * when pause, resume, or apply moved the command sequence forward.
- */
+/** In-flight batches still carry the sequence from before pause or apply. */
 export function acceptSnapshot(state: DeskState, snapshot: SessionSnapshot): DeskState {
   if (state.phase === 'error') return state;
   if (snapshot.runId !== state.runId || snapshot.commandSeq !== state.commandSeq) {

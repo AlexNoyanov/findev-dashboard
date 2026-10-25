@@ -1,16 +1,9 @@
 /**
- * Simulated market producer.
+ * Quote walk in cents. An update nudges one instrument's mid, then prints
+ * the trade at the new bid or the new ask. No matching.
  *
- * Each instrument keeps a bid and an ask in integer cents. An update picks
- * one instrument, walks that quote by a few cents, then prints a trade at
- * the new bid or the new ask. That walk is the whole price model: there is
- * no order matching here.
- *
- * One update is seven u32 values:
- * instrument, trade price, trade quantity, bid, ask, bid quantity, ask quantity.
- *
- * producer_init replaces the previous book. The module is single-threaded,
- * which matches the one worker that loads it.
+ * Seven u32s: instrument, price, qty, bid, ask, bid qty, ask qty.
+ * producer_init drops the previous book.
  */
 
 const MAX_INSTRUMENTS: i32 = 50;

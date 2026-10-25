@@ -1,8 +1,6 @@
 <section class="heading">
   <h1>Market</h1>
-  <p>
-    Cumulative volume and VWAP for this run. {{ batchesLabel() }} applied.
-  </p>
+  <p>Volume and VWAP since the last apply. {{ batchesLabel() }} applied.</p>
 </section>
 
 <div class="table-scroll">
@@ -13,11 +11,11 @@
     <thead>
       <tr>
         <th scope="col">Instrument</th>
-        <th scope="col" title="Price of the latest trade">Last</th>
+        <th scope="col" title="Latest trade">Last</th>
         <th scope="col" title="Ask minus bid">Spread</th>
-        <th scope="col" title="Sum of trade quantities this run">Volume</th>
-        <th scope="col" title="Volume-weighted average trade price this run">VWAP</th>
-        <th scope="col" title="(Bid size − ask size) / (bid size + ask size)">Imbalance</th>
+        <th scope="col" title="Trade size this run">Volume</th>
+        <th scope="col" title="Average price, weighted by size">VWAP</th>
+        <th scope="col" title="Bid size versus ask size">Imbalance</th>
       </tr>
     </thead>
     <tbody>

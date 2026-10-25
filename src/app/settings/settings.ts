@@ -65,7 +65,7 @@ export class Settings {
     const parsed = parseSettings(this.form.getRawValue());
     if (!parsed.ok) return;
     this.market.apply(parsed.value);
-    this.notice.set('New run started. Totals from the previous run were cleared.');
+    this.notice.set('Restarted.');
   }
 }
 

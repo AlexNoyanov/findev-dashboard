@@ -10,10 +10,7 @@ export interface SessionSnapshot {
   batches: number;
 }
 
-/**
- * One producer run. A batch from an older run, or a batch that arrives
- * while generation is paused, is ignored and does not move the totals.
- */
+/** Book for a single apply. A paused or foreign runId does not move totals. */
 export class RunSession {
   readonly runId: number;
   readonly settings: ProducerSettings;
